@@ -38,4 +38,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch(err => console.error("❌ DB Connection Error:", err));
 
 io.on("connection", () => {});
-server.listen(5000, () => console.log("🚀 Server running on http://localhost:5000"));
+const PORT = process.env.PORT || 5000; // use Render's port if available
+server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
