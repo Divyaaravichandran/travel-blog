@@ -13,13 +13,18 @@ const adminRoutes = require("./routes/admin");
 
 const app = express();
 const server = http.createServer(app);
+
+// Use Render's dynamic port
+const PORT = process.env.PORT || 5000;
+
+// Socket.io setup
 const io = new Server(server, { cors: { origin: "*" } });
 setIO(io);
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("uploads")); // serve profile pictures and post images
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -28,8 +33,6 @@ app.use("/api/blogs", blogsRoutes);
 app.use("/api/admin", adminRoutes);
 
 // Connect to MongoDB Atlas
-require("dotenv").config(); // load .env file
-
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -37,6 +40,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ DB Connection Error:", err));
 
-io.on("connection", () => {});
-const PORT = process.env.PORT || 5000; // use Render's port if available
+// Optional: Socket.io connection logging
+io.on("connection", (socket) => {
+  console.log("🔌 New client connected:", socket.id);
+});
+
+// Start server
 server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
