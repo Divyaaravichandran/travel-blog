@@ -6,7 +6,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const { setIO } = require("./socket");
 
-// Load dotenv only in local development
+// Load dotenv only for local development
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -34,13 +34,13 @@ app.use("/api/posts", postsRoutes);
 app.use("/api/blogs", blogsRoutes);
 app.use("/api/admin", adminRoutes);
 
-// Use Render's dynamic port or fallback to 5000 locally
+// Use Render dynamic port or fallback to 5000 locally
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB Atlas
+// MongoDB connection
 if (!process.env.MONGODB_URI) {
   console.error("❌ MONGODB_URI is not defined. Set it in your environment variables!");
-  process.exit(1); // Stop server if URI is missing
+  process.exit(1);
 }
 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -50,7 +50,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ DB Connection Error:", err));
 
-// Socket.io optional logging
+// Socket.io logging
 io.on("connection", (socket) => {
   console.log("🔌 New client connected:", socket.id);
 });
