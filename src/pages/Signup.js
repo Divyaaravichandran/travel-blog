@@ -86,7 +86,7 @@ function Signup() {
         dataToSend.append("profilePicture", formData.profilePicture);
       }
 
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
+      const response = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/signup", {
         method: "POST",
         body: dataToSend,
       });

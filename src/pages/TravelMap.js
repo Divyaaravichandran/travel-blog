@@ -36,7 +36,7 @@ function TravelMap() {
   useEffect(() => {
     const load = async () => {
       try {
-        const url = mode === 'mine' && currentUserId ? `http://localhost:5000/api/blogs/user/${currentUserId}` : `http://localhost:5000/api/blogs`;
+        const url = mode === 'mine' && currentUserId ? `https://travel-blog-3bjz.onrender.com/api/blogs/user/${currentUserId}` : `https://travel-blog-3bjz.onrender.com/api/blogs`;
         const res = await fetch(url);
         const data = await res.json();
         if (res.ok) setBlogs(Array.isArray(data) ? data : []);
@@ -106,7 +106,7 @@ function TravelMap() {
                 <div style={{ maxWidth: 220 }}>
                   <div style={{ fontWeight: 600, marginBottom: 6 }}>{b.title}</div>
                   {(b.image || (Array.isArray(b.images) && b.images[0])) && (
-                    <img src={b.image ? `http://localhost:5000/uploads/posts/${b.image}` : b.images[0]} alt={b.title} style={{ width: '100%', height: 110, objectFit: 'cover', borderRadius: 8, marginBottom: 8 }} />
+                    <img src={b.image ? `https://travel-blog-3bjz.onrender.com/uploads/posts/${b.image}` : b.images[0]} alt={b.title} style={{ width: '100%', height: 110, objectFit: 'cover', borderRadius: 8, marginBottom: 8 }} />
                   )}
                   <a href={`/blog/${b._id}`} style={{ color: '#0a98a7', fontWeight: 600 }}>Open post →</a>
                 </div>

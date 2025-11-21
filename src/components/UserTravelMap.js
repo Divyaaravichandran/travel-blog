@@ -19,7 +19,7 @@ function UserTravelMap({ userId, height = 380 }) {
     const fetchLocations = async () => {
       if (!userId) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/posts/user/${userId}/with-location`);
+        const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/user/${userId}/with-location`);
         const data = await res.json();
         if (res.ok) {
           const pts = data
@@ -27,7 +27,7 @@ function UserTravelMap({ userId, height = 380 }) {
             .map(p => ({
               id: p._id,
               title: p.title,
-              image: p.image ? `http://localhost:5000/uploads/posts/${p.image}` : null,
+              image: p.image ? `https://travel-blog-3bjz.onrender.com/uploads/posts/${p.image}` : null,
               createdAt: p.createdAt,
               lat: p.location.coordinates[1],
               lng: p.location.coordinates[0],

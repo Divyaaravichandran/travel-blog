@@ -26,7 +26,7 @@ function AdminAnalytics({ refreshSignal }) {
   const token = localStorage.getItem("token");
 
   const loadAnalytics = async () => {
-    const res = await fetch("http://localhost:5000/api/admin/analytics", {
+    const res = await fetch("https://travel-blog-3bjz.onrender.com/api/admin/analytics", {
       headers: { Authorization: `Bearer ${token}` },
     });
     const json = await res.json();
@@ -34,7 +34,7 @@ function AdminAnalytics({ refreshSignal }) {
   };
 
   const loadBlogs = async () => {
-    const res = await fetch("http://localhost:5000/api/admin/blogs", {
+    const res = await fetch("https://travel-blog-3bjz.onrender.com/api/admin/blogs", {
       headers: { Authorization: `Bearer ${token}` },
     });
     const json = await res.json();
@@ -52,7 +52,7 @@ function AdminAnalytics({ refreshSignal }) {
   const handleShowBlogs = () => { loadBlogs(); setShowBlogs(true); };
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this blog?")) return;
-    const res = await fetch(`http://localhost:5000/api/admin/blogs/${id}`, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/admin/blogs/${id}`, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
     if (res.ok) setBlogs(prev => prev.filter(b => b._id !== id));
   };
 

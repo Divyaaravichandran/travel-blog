@@ -28,7 +28,7 @@ function Profile() {
     if (!token) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/me", {
+      const response = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/me", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -88,7 +88,7 @@ function Profile() {
       const formData = new FormData();
       formData.append("profilePicture", file);
 
-      const response = await fetch("http://localhost:5000/api/auth/update-profile-picture", {
+      const response = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/update-profile-picture", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ function Profile() {
       if (response.ok) {
         alert("Profile picture updated successfully!");
         // Refresh user data
-        const userResponse = await fetch("http://localhost:5000/api/auth/me", {
+        const userResponse = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/me", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -170,7 +170,7 @@ function Profile() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/update-profile", {
+      const response = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/update-profile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -183,7 +183,7 @@ function Profile() {
       if (response.ok) {
         alert("Profile updated successfully!");
         // Refresh user data to get updated bio
-        const userResponse = await fetch("http://localhost:5000/api/auth/me", {
+        const userResponse = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/me", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -210,13 +210,13 @@ function Profile() {
     if (!user) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/user/${user._id}`);
+      const response = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/user/${user._id}`);
       const data = await response.json();
       
       if (response.ok) {
         const transformedBlogs = data.map(post => ({
           id: post._id,
-          thumbnail: post.image ? `http://localhost:5000/uploads/posts/${post.image}` : "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800",
+          thumbnail: post.image ? `https://travel-blog-3bjz.onrender.com/uploads/posts/${post.image}` : "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800",
           title: post.title,
           description: post.description,
           likes: post.likes || 0,
@@ -243,14 +243,14 @@ function Profile() {
       if (!user) return;
 
       try {
-        const response = await fetch(`http://localhost:5000/api/posts/user/${user._id}`);
+        const response = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/user/${user._id}`);
         const data = await response.json();
         
         if (response.ok) {
           // Transform API data to match our UI structure
           const transformedBlogs = data.map(post => ({
             id: post._id,
-            thumbnail: post.image ? `http://localhost:5000/uploads/posts/${post.image}` : "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800",
+            thumbnail: post.image ? `https://travel-blog-3bjz.onrender.com/uploads/posts/${post.image}` : "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800",
             title: post.title,
             description: post.description,
             likes: post.likes || 0,
@@ -332,7 +332,7 @@ function Profile() {
       if (!token) return;
 
       try {
-        const response = await fetch("http://localhost:5000/api/auth/favorites", {
+        const response = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/favorites", {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await response.json();
@@ -352,7 +352,7 @@ function Profile() {
   // Fetch comments for a specific post
   const fetchComments = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/${postId}`);
+      const response = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/${postId}`);
       if (!response.ok) {
         console.error("Failed to fetch post:", response.status, response.statusText);
         return;
@@ -414,7 +414,7 @@ function Profile() {
           <img
             src={
               user?.profilePicture
-                ? `http://localhost:5000/uploads/${user.profilePicture}`
+                ? `https://travel-blog-3bjz.onrender.com/uploads/${user.profilePicture}`
                 : "https://via.placeholder.com/120"
             }
             alt="Profile"

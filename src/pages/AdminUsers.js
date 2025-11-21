@@ -13,7 +13,7 @@ function AdminUsers({ onUserStatusChange }) {
     if (q) params.set("q", q);
     if (status) params.set("status", status);
     if (sort) params.set("sort", sort);
-    const res = await fetch(`http://localhost:5000/api/admin/users?${params.toString()}`, {
+    const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/admin/users?${params.toString()}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
@@ -24,7 +24,7 @@ function AdminUsers({ onUserStatusChange }) {
   useEffect(() => { fetchUsers(); }, [sort]);
 
   const handleSuspend = async (id) => {
-    const res = await fetch(`http://localhost:5000/api/admin/users/${id}/suspend`, {
+    const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/admin/users/${id}/suspend`, {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
     });

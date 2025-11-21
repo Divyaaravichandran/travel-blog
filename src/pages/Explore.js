@@ -103,7 +103,7 @@ function Explore() {
     
     if (userId) {
       // Fetch current user's following list
-      fetch("http://localhost:5000/api/auth/me", {
+      fetch("https://travel-blog-3bjz.onrender.com/api/auth/me", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -135,20 +135,20 @@ function Explore() {
     const currentUserId = decodeUserIdFromToken(token);
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/posts");
+        const response = await fetch("https://travel-blog-3bjz.onrender.com/api/posts");
         const data = await response.json();
         if (response.ok) {
           const transformed = data.map((post) => ({
             id: post._id,
             image: post.image
-              ? `http://localhost:5000/uploads/posts/${post.image}`
+              ? `https://travel-blog-3bjz.onrender.com/uploads/posts/${post.image}`
               : fallbackPosts[0].image,
             title: post.title,
             description: post.description,
             author: post.username,
             authorId: post.userId,
             avatar: post.profilePicture
-              ? `http://localhost:5000/uploads/${post.profilePicture}`
+              ? `https://travel-blog-3bjz.onrender.com/uploads/${post.profilePicture}`
               : fallbackPosts[0].avatar,
             likes: post.likes || 0,
             liked: Array.isArray(post.likedBy) && currentUserId
@@ -182,7 +182,7 @@ function Explore() {
     const interval = setInterval(fetchPosts, 10000);
 
     // Realtime
-    const socket = io("http://localhost:5000", {
+    const socket = io("https://travel-blog-3bjz.onrender.com", {
       transports: ["websocket", "polling"],
       reconnection: true,
       reconnectionAttempts: 8,
@@ -231,7 +231,7 @@ function Explore() {
       try {
         const q = new URLSearchParams();
         if (bloggerFilter) q.set("blogger", bloggerFilter);
-        const res = await fetch(`http://localhost:5000/api/posts/with-location?${q.toString()}`);
+        const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/with-location?${q.toString()}`);
         const data = await res.json();
         if (res.ok) setMapPosts(data);
       } catch (e) {
@@ -255,7 +255,7 @@ function Explore() {
     }
     if (blogPosts[idx]?.liked) return; // already liked, block duplicate
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${id}/like`, {
+      const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/${id}/like`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -297,7 +297,7 @@ function Explore() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${id}/comment`, {
+      const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/${id}/comment`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ text: commentInput }),
@@ -375,7 +375,7 @@ function Explore() {
 
     try {
       console.log("Toggling favorite for post:", postId);
-      const res = await fetch(`http://localhost:5000/api/auth/favorite/${postId}`, {
+      const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/auth/favorite/${postId}`, {
         method: "POST",
         headers: { 
           Authorization: `Bearer ${token}`,
@@ -427,7 +427,7 @@ function Explore() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/follow/${authorId}`, {
+      const res = await fetch(`https://travel-blog-3bjz.onrender.com/api/auth/follow/${authorId}`, {
         method: "POST",
         headers: { 
           Authorization: `Bearer ${token}`,
@@ -522,7 +522,7 @@ function Explore() {
                   <div style={{ maxWidth: 220 }}>
                     <div style={{ fontWeight: 600, marginBottom: 6 }}>{p.title}</div>
                     {p.image && (
-                      <img src={`http://localhost:5000/uploads/posts/${p.image}`} alt={p.title} style={{ width: '100%', height: 100, objectFit: 'cover', borderRadius: 8, marginBottom: 8 }} />
+                      <img src={`https://travel-blog-3bjz.onrender.com/uploads/posts/${p.image}`} alt={p.title} style={{ width: '100%', height: 100, objectFit: 'cover', borderRadius: 8, marginBottom: 8 }} />
                     )}
                     <div style={{ fontSize: 12, color: '#666', marginBottom: 6 }}>by {p.username}</div>
                     <a href={`/blog/${p._id}`} style={{ color: '#0a98a7', fontWeight: 600 }}>Open post →</a>

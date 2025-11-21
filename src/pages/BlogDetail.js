@@ -15,7 +15,7 @@ function BlogDetail() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/posts/${id}`);
+        const response = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/${id}`);
         if (!response.ok) {
           if (response.status === 404) {
             setError("Blog not found");
@@ -54,7 +54,7 @@ function BlogDetail() {
 
     setSubmittingComment(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/${id}/comment`, {
+      const response = await fetch(`https://travel-blog-3bjz.onrender.com/api/posts/${id}/comment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +161,7 @@ function BlogDetail() {
         }}>
           {post.image && (
             <img 
-              src={`http://localhost:5000/uploads/posts/${post.image}`} 
+              src={`https://travel-blog-3bjz.onrender.com/uploads/posts/${post.image}`} 
               alt={post.title}
               style={{
                 width: "100%",
@@ -187,7 +187,7 @@ function BlogDetail() {
               gap: "15px"
             }}>
               <img 
-                src={post.profilePicture ? `http://localhost:5000/uploads/${post.profilePicture}` : "https://via.placeholder.com/50"} 
+                src={post.profilePicture ? `https://travel-blog-3bjz.onrender.com/uploads/${post.profilePicture}` : "https://via.placeholder.com/50"} 
                 alt={post.username}
                 style={{
                   width: "50px",

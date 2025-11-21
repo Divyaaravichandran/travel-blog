@@ -10,7 +10,7 @@ function EditProfile() {
     const token = localStorage.getItem("token");
     const fetchMe = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/me", {
+        const res = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/me", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -55,7 +55,7 @@ function EditProfile() {
       };
       // 1) Update basic info (POST for compatibility)
       console.log("Sending form data:", form);
-      const infoRes = await fetch("http://localhost:5000/api/auth/update-profile-info", {
+      const infoRes = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/update-profile-info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function EditProfile() {
       if (avatarFile) {
         const fd = new FormData();
         fd.append("profilePicture", avatarFile);
-        const picRes = await fetch("http://localhost:5000/api/auth/update-profile-picture", {
+        const picRes = await fetch("https://travel-blog-3bjz.onrender.com/api/auth/update-profile-picture", {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
           body: fd,
